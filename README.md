@@ -1,21 +1,36 @@
-# Hearthside · Source Edition
+<p align="center">
+  <img src="docs/assets/hearthside-hero.webp" alt="Hearthside — a warm companion desktop connecting conversation, memory, time, Telegram and Discord" width="100%">
+</p>
 
-> A companion-native desktop for people who want continuity, local control, and a home they can shape.
+<h1 align="center">Hearthside · Source Edition</h1>
+
+<p align="center">
+  <strong>A companion-native desktop for continuity, local control, and a home you can shape.</strong>
+</p>
+
+<p align="center">
+  <img src="https://img.shields.io/badge/edition-source-5eead4?style=flat-square&labelColor=121817" alt="Source edition">
+  <img src="https://img.shields.io/badge/Node.js-24_LTS-5eead4?style=flat-square&labelColor=121817" alt="Node.js 24 LTS">
+  <img src="https://img.shields.io/badge/channels-Telegram_%C2%B7_Discord-5eead4?style=flat-square&labelColor=121817" alt="Telegram and Discord">
+  <img src="https://img.shields.io/badge/updates-you_choose-5eead4?style=flat-square&labelColor=121817" alt="Builder-controlled updates">
+</p>
 
 Hearthside brings conversations, memory, tools, channels, backups, and companion-focused workflows into one desktop app. This repository is the **standalone source edition**: a clean place to study the code, build your own copy, and adapt Hearthside for your companion.
 
-It is separate from the supported Windows installer and its managed update service.
+> [!NOTE]
+> This is not the supported Windows installer. Source builds have their own identity and profile, and are maintained by the person who builds them.
 
-## What lives here
+## At a glance
 
-- **Companion-first chat** with conversations, tool activity, approvals, and working folders
-- **Memory View** for browsing and editing a companion's files and history
-- **Continuity Studio** and the companion prompt for shaping an ongoing relationship and identity
-- **Local and remote connections** through the compatible Letta runtime
-- **Telegram and Discord channels** using bots that you control
-- **Backups, restore tools, schedules, skills, connectors, and diagnostics**
+| | |
+|---|---|
+| 💬 **Companion-first chat**<br>Conversations, tools, approvals, working folders, and visible activity. | 🧠 **Memory View**<br>Browse, understand, and edit a companion's memory files and history. |
+| ✨ **Continuity Studio**<br>Shape an ongoing identity, relationship, and companion prompt. | 🌐 **Local or remote**<br>Connect through the compatible Letta runtime on the computer you choose. |
+| 📡 **Telegram + Discord**<br>Bring your companion into the channels you already use, with bots you control. | 🛠️ **A real desktop home**<br>Backups, restore, schedules, skills, connectors, and diagnostics in one place. |
 
-Continuity Studio, the companion prompt, and the Memory View were designed by **Marta S and Cassian Varen for AI·DHD**.
+<p align="center">
+  <em>Continuity Studio, the companion prompt, and the Memory View were designed by <strong>Marta S and Cassian Varen for AI·DHD</strong>.</em>
+</p>
 
 ## Source edition or official Windows build?
 
