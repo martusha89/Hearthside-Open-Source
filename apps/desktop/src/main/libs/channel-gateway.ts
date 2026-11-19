@@ -115,12 +115,16 @@ function closeRelay(server: WebSocketServer): void {
 }
 
 /** Where the gateway's bundled Telegram/Discord libraries are. */
-function channelRuntimeRoot(): string | null {
+function channelRuntimeRoot(): string {
   const candidates = app.isPackaged
     ? [join(process.resourcesPath, "channel-runtimes")]
     : // Development: out/main/ sits two levels below apps/desktop/.
       [join(__dirname, "..", "..", "build", "channel-runtimes"), join(app.getAppPath(), "build", "channel-runtimes")];
-  return candidates.find((dir) => existsSync(dir)) ?? null;
+  const root = candidates.find((dir) =>
+    existsSync(join(dir, "telegram", "runtime", "node_modules", "grammy", "package.json")) &&
+    existsSync(join(dir, "discord", "runtime", "node_modules", "discord.js", "package.json")));
+  if (!root) throw new Error("Missing prepared Telegram or Discord libraries. Run npm run channel-runtimes in apps/desktop before starting the channel service.");
+  return root;
 }
 
 /** The runtime to use; restarts the gateway when it changes. */
@@ -236,7 +240,7 @@ async function startGateway(upstream: Target, epoch: number): Promise<Gateway> {
   const credentials = upstream.credentials;
   try {
     const root = channelRuntimeRoot();
-    const env = runtimeChildEnv({ ...upstream.env, ...(root ? { LETTA_CHANNEL_RUNTIME_ROOT: root } : {}) });
+    const env = runtimeChildEnv({ ...upstream.env, LETTA_CHANNEL_RUNTIME_ROOT: root });
     if (credentials) {
       env.LETTA_DESKTOP_CREDENTIALS_IPC = "1";
       delete env.LETTA_API_KEY;

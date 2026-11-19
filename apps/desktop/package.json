@@ -6,11 +6,12 @@
   "description": "Independent source edition desktop client",
   "main": "out/main/index.js",
   "scripts": {
-    "dev": "node scripts/prepare-runtime.mjs && node scripts/electron-vite.mjs dev",
+    "dev": "npm run prepare-runtime && node scripts/electron-vite.mjs dev",
     "build": "electron-vite build",
-    "test": "node --test scripts/source-edition.test.mjs && vitest run scripts/synthetic-import.test.ts",
-    "preview": "node scripts/prepare-runtime.mjs && node scripts/electron-vite.mjs preview",
-    "prepare-runtime": "node scripts/prepare-runtime.mjs",
+    "test": "node --test scripts/source-edition.test.mjs scripts/channel-runtimes.test.mjs && vitest run scripts/synthetic-import.test.ts",
+    "preview": "npm run prepare-runtime && node scripts/electron-vite.mjs preview",
+    "prepare-runtime": "node scripts/prepare-runtime.mjs && npm run channel-runtimes",
+    "channel-runtimes": "node scripts/channel-runtimes.mjs",
     "typecheck": "tsc --noEmit -p tsconfig.node.json && tsc --noEmit -p tsconfig.web.json"
   },
   "dependencies": {

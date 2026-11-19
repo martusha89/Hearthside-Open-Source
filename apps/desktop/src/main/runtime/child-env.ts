@@ -92,7 +92,15 @@ export function withoutInjectedCode(env: NodeJS.ProcessEnv): NodeJS.ProcessEnv {
  * whether the runtime home is the sandbox or the real one; a person who set them for
  * the Letta CLI keeps them there. The source edition selects its own keyring service.
  */
-const STATE_REDIRECTS = ["LETTA_CONFIG_DIR", "LETTA_SECRETS_SERVICE_NAME"];
+const STATE_REDIRECTS = [
+  "LETTA_CONFIG_DIR", "LETTA_SECRETS_SERVICE_NAME",
+  // The desktop selects the adapter root and owns channel activation. Do not
+  // inherit a CLI runtime root, a plaintext-store override, or restore flags.
+  "LETTA_CHANNEL_RUNTIME_ROOT", "LETTA_CHANNEL_CREDENTIALS_STORE",
+  "LETTA_RESTORE_ENABLED_CHANNELS", "LETTA_RESTORE_ENABLED_CHANNELS_AGENT_SCOPE", "LETTA_RESTORE_CHANNEL_AGENT_SCOPE",
+  // Bot accounts are configured via the Channels UI, not the launch shell.
+  "TELEGRAM_BOT_TOKEN", "DISCORD_BOT_TOKEN",
+];
 export function withoutStateRedirects(env: NodeJS.ProcessEnv): NodeJS.ProcessEnv {
   const out: NodeJS.ProcessEnv = { ...env };
   for (const name of Object.keys(out)) if (STATE_REDIRECTS.includes(name.toUpperCase())) delete out[name];

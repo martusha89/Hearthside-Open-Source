@@ -1,0 +1,7 @@
+{
+  "name": "letta-channel-runtime-telegram",
+  "private": true,
+  "dependencies": {
+    "grammy": "1.42.0"
+  }
+}

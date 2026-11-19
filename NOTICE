@@ -36,5 +36,10 @@ follows:
     OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
     SOFTWARE.
 
+Optional channel integrations use grammY (grammy 1.42.0, MIT) for Telegram and
+discord.js (14.18.0, Apache-2.0) for Discord. These packages and their
+dependencies retain their own licenses. Preserve their applicable license and
+notice files when redistributing the installed runtimes.
+
 Brand logos from Simple Icons (https://simpleicons.org), CC0-1.0. Logos are trademarks of their
 respective owners and are used only to identify the services they belong to.
