@@ -3,6 +3,7 @@ import { folderName } from "../lib/format";
 import MDContent from "../render/markdown";
 import { composerKey, selectCwd, useAppStore } from "../store";
 import { ChevronRightIcon, FileIcon, FolderIcon, Spinner } from "./icons";
+import { CompanionPageHeader } from "./CompanionPageHeader";
 
 /**
  * Hearthside: the agent's working folder. Read what it made; Markdown and
@@ -83,11 +84,7 @@ export function FilesView() {
   const kind = selected?.match(/\.(md|markdown)$/i) ? "markdown" : selected?.match(/\.html?$/i) ? "html" : "text";
   return (
     <main className="flex min-w-0 flex-1 flex-col bg-surface">
-      <header className="app-drag flex h-12 shrink-0 items-center justify-center border-b border-border px-6">
-        <span className="truncate text-sm font-medium text-ink-700" title={root}>
-          Files in {folderName(root) || "the working folder"}
-        </span>
-      </header>
+      <CompanionPageHeader title={`Files · ${folderName(root) || "working folder"}`} />
       <div className="flex min-h-0 flex-1">
         <nav className="w-72 shrink-0 overflow-y-auto border-r border-border py-2" aria-label="Files">
           <Folder key={root} root={root} path="" depth={0} selected={selected} onOpen={open} />

@@ -10,6 +10,7 @@ import { MemoryWeb } from "./MemoryWeb";
 import { BackToChat } from "./BackToChat";
 import type { MemoryCommit, MemoryFile } from "../types";
 import { ChevronRightIcon, HistoryIcon, PlusIcon, RefreshIcon, Spinner } from "./icons";
+import { CompanionPageHeader } from "./CompanionPageHeader";
 
 const api = window.bridge;
 
@@ -410,12 +411,10 @@ export function MemoryView() {
 
   return (
     <main className="flex min-w-0 flex-1 flex-col bg-surface">
-      <header className="app-drag relative flex h-12 shrink-0 items-center justify-center border-b border-border px-6">
-        <div className="absolute left-3 max-w-[34%] [&>button]:max-w-full"><BackToChat onNavigate={leave} /></div>
-        <span className="max-w-[32%] truncate text-sm font-medium text-ink-700">
-          {agent ? `${agent.name}'s memory` : "Memory"}
-        </span>
-        <div role="tablist" aria-label="Memory view" className="absolute right-4 flex gap-1 rounded-xl bg-surface-tertiary p-1">
+      <CompanionPageHeader
+        title="Memory world"
+        leading={<BackToChat onNavigate={leave} />}
+        trailing={<div role="tablist" aria-label="Memory view" className="flex gap-1 rounded-xl bg-surface-tertiary p-1">
           {(["web", "files"] as const).map((item) => (
             <button
               key={item}
@@ -425,11 +424,11 @@ export function MemoryView() {
               onClick={() => leave(() => setTab(item))}
               className={`rounded-lg px-3 py-1 text-xs transition-colors ${tab === item ? "bg-surface font-medium text-ink-900 shadow-soft" : "text-ink-600 hover:text-ink-900"}`}
             >
-              {item === "web" ? "Web" : "Files"}
+              {item === "web" ? "World" : "Files"}
             </button>
           ))}
-        </div>
-      </header>
+        </div>}
+      />
 
       {tab === "web" && agentId ? (
         <MemoryWeb
@@ -505,7 +504,7 @@ export function MemoryView() {
           {files.some((item) => item.system) && (
             <p className="flex items-center gap-2 border-t border-border px-3.5 py-2.5 text-xs text-muted">
               <span className="h-1.5 w-1.5 shrink-0 rounded-full bg-accent" />
-              Always in the agent's context
+              Always in the companion's context
             </p>
           )}
         </div>
@@ -523,7 +522,7 @@ export function MemoryView() {
             <div className="flex flex-1 flex-col items-center justify-center px-6 text-center">
               <h2 className="text-lg font-semibold text-ink-900">No memory files</h2>
               <p className="mt-2 max-w-sm text-sm text-muted">
-                This agent does not use file-based memory, so there is nothing to show here.
+                This companion does not use file-based memory, so there is nothing to show here.
               </p>
             </div>
           ) : mode.kind === "new" ? (
@@ -548,7 +547,7 @@ export function MemoryView() {
                   <input
                     value={mode.description}
                     onChange={(event) => setMode({ ...mode, description: event.target.value })}
-                    placeholder="One line that tells the agent when to read this file"
+                    placeholder="One line that tells the companion when to read this file"
                     className="field"
                   />
                 </label>
@@ -556,7 +555,7 @@ export function MemoryView() {
               <textarea
                 value={mode.draft}
                 onChange={(event) => setMode({ ...mode, draft: event.target.value })}
-                placeholder="What should the agent remember?"
+                placeholder="What should the companion remember?"
                 spellCheck={false}
                 className="field min-h-0 flex-1 resize-none font-mono text-[13px] leading-relaxed"
               />
@@ -565,7 +564,7 @@ export function MemoryView() {
             <div className="flex flex-1 flex-col items-center justify-center px-6 text-center">
               <h2 className="text-lg font-semibold text-ink-900">Nothing remembered yet</h2>
               <p className="mt-2 max-w-sm text-sm text-muted">
-                The agent writes memory files as it works. You can also add one yourself.
+                The companion writes memory files as they work. You can also add one yourself.
               </p>
             </div>
           ) : (

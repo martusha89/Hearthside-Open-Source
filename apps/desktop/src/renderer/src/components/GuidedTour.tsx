@@ -19,6 +19,11 @@ export const TOUR_STOPS: Stop[] = [
     body: "Switch between your companions here, and star the ones you talk to most. The + makes a new one.",
   },
   {
+    target: "presence",
+    title: "Presence",
+    body: "Your companion's place in the app: return to the main relationship thread, see what needs attention, and enter memory, channels or shared time.",
+  },
+  {
     target: "new-chat",
     title: "Chats",
     body: "Start a fresh conversation any time. Your companion remembers across all of them, and your chats are listed below.",
@@ -35,13 +40,13 @@ export const TOUR_STOPS: Stop[] = [
   },
   {
     target: "tools",
-    title: "Skills, schedules and calendar",
-    body: "Skills teach your companion new abilities. Schedules let them check in on their own, like a morning hello. The calendar is yours to share with them.",
+    title: "Time and reach",
+    body: "Schedules let your companion return at chosen times, the calendar is yours to share with them, and channels bring them to Telegram or Discord.",
   },
   {
     target: "more",
-    title: "More",
-    body: "Channels, to talk from Telegram or Discord. Connectors, for tools like a voice, Notion or your own apps. And archived chats.",
+    title: "Tools and history",
+    body: "Skills teach new abilities. Connectors add tools like a voice, Notion or your own apps. Files, archived chats and restored history live here too.",
   },
   {
     target: "settings",

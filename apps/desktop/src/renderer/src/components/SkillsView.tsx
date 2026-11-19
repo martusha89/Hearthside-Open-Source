@@ -4,6 +4,7 @@ import MDContent from "../render/markdown";
 import type { CatalogSkill, InstalledSkill, SkillNeeds, SkillTarget } from "../types";
 import { ChevronRightIcon, Spinner } from "./icons";
 import { BackToChat } from "./BackToChat";
+import { CompanionPageHeader } from "./CompanionPageHeader";
 
 /**
  * Hearthside: the agent's skills. Skills teach an agent how to do something
@@ -273,10 +274,7 @@ export function SkillsView() {
 
   return (
     <main className="flex min-w-0 flex-1 flex-col bg-surface">
-      <header className="app-drag relative flex h-12 shrink-0 items-center justify-center border-b border-border px-6">
-        <div className="absolute left-3 max-w-[40%] [&>button]:max-w-full"><BackToChat /></div>
-        <span className="max-w-[40%] truncate text-sm font-medium text-ink-700">{agentName}'s skills</span>
-      </header>
+      <CompanionPageHeader title="Skills" leading={<BackToChat />} />
       <div className="min-h-0 flex-1 overflow-y-auto">
         <div className="mx-auto grid w-full max-w-3xl gap-6 px-6 py-6">
           <p className="text-sm text-muted">

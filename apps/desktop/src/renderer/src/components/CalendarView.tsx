@@ -6,6 +6,7 @@ import { LaterActions } from "./LaterActions";
 import { TimezoneSelect } from "./ZonedDateTime";
 import { isExplicitInstant, resolveWallTime, wallTimeChoices } from "../lib/zoned-date";
 import { addDays, blankDraft, daysBetween, type Draft, draftFrom, eventEnd, remindAgentFor, splitLocal } from "../lib/calendar-draft";
+import { CompanionPageHeader } from "./CompanionPageHeader";
 
 /**
  * Hearthside: the built-in calendar. Your own events, plus read-only calendars
@@ -493,9 +494,7 @@ export function CalendarView() {
 
   return (
     <main className="flex min-w-0 flex-1 flex-col bg-surface">
-      <header className="app-drag flex h-12 shrink-0 items-center justify-center border-b border-border px-6">
-        <span className="truncate text-sm font-medium text-ink-700">Calendar</span>
-      </header>
+      <CompanionPageHeader title="Calendar" />
       <div className="min-h-0 flex-1 overflow-y-auto">
         <div className="mx-auto grid w-full max-w-3xl gap-5 px-6 py-6">
           <div className="flex flex-wrap items-center gap-3">

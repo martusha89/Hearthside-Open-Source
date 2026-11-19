@@ -10,6 +10,7 @@ import {
   validateScheduleTiming,
 } from "../lib/schedule-presets";
 import { relativeTime } from "../lib/format";
+import { CompanionPageHeader } from "./CompanionPageHeader";
 import { useAppStore } from "../store";
 import type { ChannelAccount, Schedule, ScheduleRun } from "../types";
 import { channelDisplayName, parseDelivery, type ScheduleDelivery, withDelivery } from "../lib/schedule-presets";
@@ -390,10 +391,7 @@ export function SchedulesView() {
 
   return (
     <main className="flex min-w-0 flex-1 flex-col bg-surface">
-      <header className="app-drag flex h-12 shrink-0 items-center justify-center border-b border-border px-6">
-        <BackToChat />
-        <span className="truncate text-sm font-medium text-ink-700">{agentName}'s schedules</span>
-      </header>
+      <CompanionPageHeader title="Schedules" leading={<BackToChat />} />
       <div className="min-h-0 flex-1 overflow-y-auto">
         <div className="mx-auto grid w-full max-w-3xl gap-4 px-6 py-6">
           <p className="text-sm text-muted">

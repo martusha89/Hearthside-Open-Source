@@ -5,6 +5,7 @@ import { BrandLogo, brandFor } from "./BrandLogo";
 import { CATALOG, CATEGORIES, type CatalogEntry } from "../lib/connector-catalog";
 import { ChevronRightIcon, Spinner } from "./icons";
 import { ImageGenerationCard } from "./ImageGenerationCard";
+import { CompanionPageHeader } from "./CompanionPageHeader";
 
 /**
  * Hearthside: connectors (MCP servers) give an agent extra tools. One list:
@@ -1306,9 +1307,7 @@ function ConnectorsForContext() {
 
   return (
     <main className="flex min-w-0 flex-1 flex-col bg-surface">
-      <header className="app-drag flex h-12 shrink-0 items-center justify-center border-b border-border px-6">
-        <span className="truncate text-sm font-medium text-ink-700">{agentName}'s connectors</span>
-      </header>
+      <CompanionPageHeader title="Connectors" />
       <div className="min-h-0 flex-1 overflow-y-auto">
         <div className="mx-auto grid w-full max-w-3xl gap-4 px-6 py-6">
           <p className="text-sm text-muted">
