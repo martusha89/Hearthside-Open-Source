@@ -17,6 +17,7 @@ The application has five territories:
 ## Product principles
 
 - **The companion is the subject, not a selected resource.** Names, pictures, continuity, activity, and conversations lead. Models and backends remain available without becoming the identity of the app.
+- **Presence must answer, not gesture.** Its space is earned by observed current activity, recent conversation substance, memory change, connected reach, and upcoming shared time—not larger duplicates of sidebar links.
 - **Do not fake inner states.** Hearthside may show observed activity, waiting work, memory changes, and connection state. It will not invent a mood or claim a companion is present when no runtime is connected.
 - **Keep power; improve hierarchy.** The rebuild does not delete advanced controls to manufacture simplicity. It puts them where their meaning is clear.
 - **Memory remains first-class.** The existing memory cosmos is original and central. It is preserved, not replaced by a dashboard summary.
@@ -30,6 +31,7 @@ The application has five territories:
 The initial rebuild establishes the new hierarchy without replacing proven runtime paths:
 
 - Add **Presence** as a companion-centred home.
+- Ground Presence in bounded recent-message previews, explicit attention state, latest memory activity, companion-owned channel status, active schedules, and shared calendar access.
 - Reorganise navigation around Presence, Memory, Reach, Work, and Conversations.
 - Give conversation headers the companion's identity as well as the room title.
 - Give the source edition a violet-and-teal default visual register while preserving each companion's chosen accent, avatar, and chat background.

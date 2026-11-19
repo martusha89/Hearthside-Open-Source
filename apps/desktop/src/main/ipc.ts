@@ -25,6 +25,7 @@ import {
   getConnection,
   listAgents,
   listConversations,
+  listConversationPreviews,
   loadHistory,
   latestMessageMark,
   sandboxLinkAccess,
@@ -301,6 +302,7 @@ const handlers: Handlers = {
   listMemoryActivity,
   readMemoryCommitDiff,
   listConversations,
+  listConversationPreviews,
   loadHistory,
   latestMessageMark,
   renameConversation,
@@ -399,6 +401,10 @@ const handlers: Handlers = {
   startImageSetup: (step, mode) => startImageSetup(step, mode),
   cancelImageSetup: (sessionId) => cancelImageSetup(sessionId),
   listCalendar: (fromMs, toMs) => listOccurrences(fromMs, toMs),
+  getPresenceCalendar: (agentId, fromMs, toMs) => {
+    const shared = calendarAccess().includes(agentId);
+    return { shared, occurrence: shared ? (listOccurrences(fromMs, toMs)[0] ?? null) : null };
+  },
   saveCalendarEvent: (input) => saveEvent(input, "person"),
   deleteCalendarEvent: (id) => deleteEvent(id),
   listCalendarSubscriptions: () => listSubscriptions(),

@@ -38,6 +38,7 @@ import type {
   CommandRunResult,
   ConnectionState,
   RuntimeCommand,
+  ConversationPreview,
   ConversationSummary,
   HistoryVolume,
   ConversationDestinationOutcome,
@@ -1347,6 +1348,38 @@ export async function latestMessageMark(conversationId: string): Promise<string 
   if (!newest) return null;
   const record = newest as unknown as { id?: unknown; date?: unknown; created_at?: unknown };
   return `${String(record.id ?? "")}@${String(record.date ?? record.created_at ?? "")}`;
+}
+
+/**
+ * Latest meaningful human/companion text for a small recent-conversation list.
+ * Ownership is checked in the main process; one failed or tool-only chat does
+ * not hide previews that were available for the others.
+ */
+export async function listConversationPreviews(agentId: string, conversationIds: string[]): Promise<ConversationPreview[]> {
+  const sdk = await ensureClient();
+  const previews = await Promise.all(conversationIds.map(async (conversationId): Promise<ConversationPreview | null> => {
+    if (await conversationAgent(conversationId) !== agentId) return null;
+    try {
+      const mainAgent = mainChatAgent(conversationId);
+      const messages = mainAgent
+        ? await listMainChatMessages(mainAgent, 8)
+        : ((await sdk.conversations.listMessages(conversationId, { limit: 8, order: "desc" })) as unknown as { messages: WireMessage[] }).messages;
+      const latest = [...projectHistory(messages as unknown as Parameters<typeof projectHistory>[0])]
+        .reverse()
+        .find((row) => (row.kind === "user" || row.kind === "assistant") && row.source !== "controller" && row.text.trim());
+      if (!latest || (latest.kind !== "user" && latest.kind !== "assistant")) return null;
+      const oneLine = latest.text.replace(/\s+/g, " ").trim();
+      return {
+        conversationId,
+        kind: latest.kind,
+        text: oneLine.length > 240 ? `${oneLine.slice(0, 239).trimEnd()}…` : oneLine,
+        date: latest.date ?? null,
+      };
+    } catch {
+      return null;
+    }
+  }));
+  return previews.filter((preview): preview is ConversationPreview => preview !== null);
 }
 
 export async function loadHistory(conversationId: string, limit: number, options: { before?: string; around?: string } = {}): Promise<HistoryResult> {
