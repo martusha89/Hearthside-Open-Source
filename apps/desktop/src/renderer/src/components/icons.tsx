@@ -97,6 +97,15 @@ export const MemoryIcon = (props: IconProps) => (
   </Icon>
 );
 
+/** A companion's present place: a living centre with an open orbit. */
+export const PresenceIcon = (props: IconProps) => (
+  <Icon {...props}>
+    <circle cx="12" cy="12" r="3.25" />
+    <path d="M12 2.75a9.25 9.25 0 1 1-6.54 2.71" />
+    <path d="M4.25 3.75h3.5v3.5" />
+  </Icon>
+);
+
 export const HistoryIcon = (props: IconProps) => (
   <Icon {...props}>
     <path d="M3 12a9 9 0 1 0 3-6.7L3 8" />

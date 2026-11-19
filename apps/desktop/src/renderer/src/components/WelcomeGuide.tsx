@@ -115,7 +115,7 @@ export function WelcomeGuide() {
                     setStep("existing");
                   }}
                 >
-                  <span className="text-sm font-semibold text-ink-900">I already have an agent</span>
+                  <span className="text-sm font-semibold text-ink-900">I already have a companion or agent</span>
                   <span className="text-xs text-muted">From Letta Cloud, Letta Code or Letta Desktop. Pick up where you left off.</span>
                 </button>
                 <button
@@ -140,10 +140,10 @@ export function WelcomeGuide() {
 
           {step === "existing" && (
             <>
-              <Dialog.Title className={heading}>Where is your agent?</Dialog.Title>
+              <Dialog.Title className={heading}>Where do they live?</Dialog.Title>
               <Dialog.Description className={text}>Hearthside connects to it there. Nothing is moved or copied.</Dialog.Description>
               <fieldset className="mt-4 grid gap-2">
-                <legend className="sr-only">Where your agent is</legend>
+                <legend className="sr-only">Where your companion or agent lives</legend>
                 {EXISTING.map((item) => (
                   <label key={item.id} className={card(existingPlace === item.id)}>
                     <input
@@ -213,7 +213,7 @@ export function WelcomeGuide() {
               <Dialog.Title className={heading}>Where should your companion live?</Dialog.Title>
               <Dialog.Description className={text}>You can change this any time in Settings.</Dialog.Description>
               <fieldset className="mt-4 grid gap-2">
-                <legend className="sr-only">Where agents live</legend>
+                <legend className="sr-only">Where companions live</legend>
                 {PLACES.map((item) => (
                   <label key={item.id} className={card(place === item.id)}>
                     <input
@@ -281,10 +281,10 @@ export function WelcomeGuide() {
 
           {step === "agent" && path === "existing" && (
             <>
-              <Dialog.Title className={heading}>{agents.length > 0 ? "Your agents are here" : "No agents yet"}</Dialog.Title>
+              <Dialog.Title className={heading}>{agents.length > 0 ? "They are here" : "Nobody is here yet"}</Dialog.Title>
               <Dialog.Description className={text}>
                 {agents.length > 0
-                  ? `Found ${agents.length} agent${agents.length === 1 ? "" : "s"}. Switch between them at the top left; star the ones you use most.`
+                  ? `Found ${agents.length} companion${agents.length === 1 ? "" : "s"} or agent${agents.length === 1 ? "" : "s"}. Switch between them at the top left; star the ones you return to most.`
                   : "None showed up yet. If you just signed in or switched folders, give it a moment. You can also check Settings → Connection, or build a new companion."}
               </Dialog.Description>
               <div className="mt-6 flex justify-between gap-2">
@@ -369,14 +369,18 @@ export function WelcomeGuide() {
               <Dialog.Title className={heading}>A few things to know</Dialog.Title>
               <ul className="mt-3 grid gap-2 text-sm text-ink-800">
                 <li>
-                  <span className="font-medium">Memory</span>, in the sidebar, shows everything your agent remembers as a web. Click any
+                  <span className="font-medium">Presence</span> is where you return to the person behind the chats: their main thread, memory,
+                  reach, and shared time.
+                </li>
+                <li>
+                  <span className="font-medium">Memory</span>, in the sidebar, shows everything your companion remembers as a world. Click any
                   file to read or edit it.
                 </li>
                 <li>
                   Type <span className="font-mono">/</span> in the message box for shortcuts like{" "}
                   <span className="font-mono">/remember</span> and <span className="font-mono">/dream</span>.
                 </li>
-                <li>Closing the window keeps Hearthside running by the clock, so your agent stays reachable.</li>
+                <li>Closing the window keeps Hearthside running by the clock, so your companion stays reachable.</li>
               </ul>
               <div className="mt-6 flex justify-end">
                 <button type="button" className={primary} onClick={finish}>

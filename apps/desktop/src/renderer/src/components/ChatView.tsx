@@ -13,6 +13,7 @@ import { HelpersPanel } from "./HelpersPanel";
 import { ToolRun } from "./ToolRun";
 import { segmentRows } from "../lib/tool-runs";
 import { backgroundStyle } from "../lib/looks";
+import { Avatar } from "./Avatar";
 
 const FOLLOW_THRESHOLD = 80;
 // Transient view state only; no transcript content is copied or persisted here.
@@ -216,6 +217,7 @@ export function ChatView() {
   }, [channelsUsed, refreshConversations]);
   // Hearthside: the companion's own chat background, if they gave it one.
   const look = useAppStore((state) => (state.agentId ? state.looks?.agents[state.agentId] : undefined));
+  const agent = useAppStore((state) => state.agents.find((item) => item.id === state.agentId) ?? null);
   const activity = activeId ? chat.activity : pendingFirstMessage ? "Starting" : null;
   const approval = activeId ? chat.approvals[0] : undefined;
   const loadingFirstPage = Boolean(activeId) && !chat.loaded;
@@ -335,10 +337,16 @@ export function ChatView() {
           <div className="absolute inset-0" style={backgroundStyle(look)} />
         </div>
       )}
-      <header className="app-drag relative flex h-12 shrink-0 items-center justify-center border-b border-border px-12">
-        <span className="truncate text-sm font-medium text-ink-700">
-          {historyVolume ? `${historyChatTitle(historyVolume)} · history · ${historySpan(historyVolume)}` : activeId ? title || "New chat" : "New chat"}
-        </span>
+      <header className="app-drag relative flex h-16 shrink-0 items-center border-b border-border bg-surface/85 px-4 pr-14 backdrop-blur-xl">
+        <div className="flex min-w-0 items-center gap-3">
+          {agent && <Avatar name={agent.name} src={look?.avatar} px={30} />}
+          <span className="min-w-0">
+            <strong className="block truncate text-sm font-semibold text-ink-900">{agent?.name ?? "Companion"}</strong>
+            <span className="block truncate text-xs text-muted">
+              {historyVolume ? `${historyChatTitle(historyVolume)} · history · ${historySpan(historyVolume)}` : activeId ? title || "New conversation" : "New conversation"}
+            </span>
+          </span>
+        </div>
         {/* Hearthside: the helpers this chat's agent sent off (as the old app's Subagents panel). */}
         <button
           type="button"

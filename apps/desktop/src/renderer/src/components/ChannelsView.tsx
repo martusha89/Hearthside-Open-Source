@@ -4,6 +4,7 @@ import { useAppStore } from "../store";
 import type { ChannelAccess, ChannelAccount, ChannelBotReassign, ChannelChatMode, MutedChannel, ChannelField, ChannelInfo, ChannelPairing, ChannelRoute } from "../types";
 import { ChevronRightIcon, Spinner } from "./icons";
 import { channelServiceCameUp, groupChannelBots, pairingsForOwnBots } from "../lib/channel-bots";
+import { CompanionPageHeader } from "./CompanionPageHeader";
 
 /**
  * Hearthside: Telegram and Discord. Connect a bot to the agent, approve who
@@ -821,9 +822,7 @@ export function ChannelsView() {
 
   return (
     <main className="flex min-w-0 flex-1 flex-col bg-surface">
-      <header className="app-drag flex h-12 shrink-0 items-center justify-center border-b border-border px-6">
-        <span className="truncate text-sm font-medium text-ink-700">{agentName} on Telegram and Discord</span>
-      </header>
+      <CompanionPageHeader title="Channels" />
       <div className="min-h-0 flex-1 overflow-y-auto">
         <div className="mx-auto grid w-full max-w-3xl gap-4 px-6 py-6">
           {backend === "remote" ? (

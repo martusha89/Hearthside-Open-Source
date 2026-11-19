@@ -11,6 +11,7 @@ import {
   ChevronRightIcon,
   HistoryIcon,
   MemoryIcon,
+  PresenceIcon,
   SkillsIcon,
   CalendarIcon,
   ClockIcon,
@@ -151,7 +152,7 @@ function AgentSwitcher() {
           {current && (
             <DropdownMenu.Item className={menuItem} onSelect={() => setAgentSettingsOpen(true)}>
               <SettingsIcon className="h-4 w-4 shrink-0 text-muted" />
-              Agent settings...
+              Companion settings...
             </DropdownMenu.Item>
           )}
           <DropdownMenu.Item className={menuItem} onSelect={() => setNewAgentOpen(true)}>
@@ -377,7 +378,7 @@ function ConversationItem({
         {preference.starred && <span role="img" aria-label="Starred" className="shrink-0 text-warning">★</span>}
         <span
           className={`min-w-0 flex-1 truncate text-sm ${active ? "text-ink-900" : unread ? "text-ink-900" : "text-ink-800"} ${conversation.main || unread ? "font-medium" : ""}`}
-          title={conversation.main ? "The agent's original conversation" : undefined}
+          title={conversation.main ? "The companion's original conversation" : undefined}
         >
           {conversation.title || "New chat"}
         </span>
@@ -675,8 +676,10 @@ export function Sidebar() {
   const agentId = useAppStore((state) => state.agentId);
   const connection = useAppStore((state) => state.connection);
   const openChat = useAppStore((state) => state.openChat);
+  const openPresence = useAppStore((state) => state.openPresence);
   const openMemory = useAppStore((state) => state.openMemory);
   const openSettings = useAppStore((state) => state.openSettings);
+  const presenceOpen = useAppStore((state) => state.view === "presence");
   const memoryOpen = useAppStore((state) => state.view === "memory");
   const skillsOpen = useAppStore((state) => state.view === "skills");
   const openSkills = useAppStore((state) => state.openSkills);
@@ -706,7 +709,7 @@ export function Sidebar() {
     }
   });
   // Open while one of its pages is showing.
-  const moreShown = moreOpen || channelsOpen || connectorsOpen || filesOpen;
+  const moreShown = moreOpen || skillsOpen || connectorsOpen || filesOpen;
   const toggleMore = () => {
     const next = !moreShown;
     setMoreOpen(next);
@@ -747,10 +750,21 @@ export function Sidebar() {
         </div>
         <button
           type="button"
+          data-tour="presence"
+          disabled={!agentId}
+          onClick={openPresence}
+          aria-pressed={presenceOpen}
+          className={`mt-2 flex w-full items-center gap-2 rounded-xl px-3 py-2 text-sm font-medium transition-colors disabled:cursor-not-allowed disabled:opacity-50 ${presenceOpen ? "bg-ink-900/8 text-ink-900" : "text-ink-800 hover:bg-ink-900/5"}`}
+        >
+          <PresenceIcon className="h-4 w-4" />
+          Presence
+        </button>
+        <button
+          type="button"
           data-tour="new-chat"
           disabled={!agentId}
           onClick={() => openChat(null)}
-          className="mt-2 flex w-full items-center gap-2 rounded-xl border border-border bg-surface px-3 py-2 text-sm font-medium text-ink-800 hover:bg-surface-tertiary transition-colors disabled:cursor-not-allowed disabled:opacity-50"
+          className="mt-1 flex w-full items-center gap-2 rounded-xl border border-border bg-surface px-3 py-2 text-sm font-medium text-ink-800 hover:bg-surface-tertiary transition-colors disabled:cursor-not-allowed disabled:opacity-50"
         >
           <PlusIcon className="h-4 w-4" />
           New chat
@@ -771,16 +785,6 @@ export function Sidebar() {
         <button
           type="button"
           disabled={!agentId}
-          onClick={openSkills}
-          aria-pressed={skillsOpen}
-          className={`flex w-full items-center gap-2 rounded-lg px-3 py-2 text-sm transition-colors disabled:cursor-not-allowed disabled:opacity-50 ${skillsOpen ? "bg-ink-900/8 text-ink-900" : "text-ink-800 hover:bg-ink-900/5"}`}
-        >
-          <SkillsIcon className="h-4 w-4" />
-          Skills
-        </button>
-        <button
-          type="button"
-          disabled={!agentId}
           onClick={openSchedules}
           aria-pressed={schedulesOpen}
           className={`flex w-full items-center gap-2 rounded-lg px-3 py-2 text-sm transition-colors disabled:cursor-not-allowed disabled:opacity-50 ${schedulesOpen ? "bg-ink-900/8 text-ink-900" : "text-ink-800 hover:bg-ink-900/5"}`}
@@ -798,6 +802,16 @@ export function Sidebar() {
           <CalendarIcon className="h-4 w-4" />
           Calendar
         </button>
+        <button
+          type="button"
+          disabled={!agentId}
+          onClick={openChannels}
+          aria-pressed={channelsOpen}
+          className={`flex w-full items-center gap-2 rounded-lg px-3 py-2 text-sm transition-colors disabled:cursor-not-allowed disabled:opacity-50 ${channelsOpen ? "bg-ink-900/8 text-ink-900" : "text-ink-800 hover:bg-ink-900/5"}`}
+        >
+          <SendIcon className="h-4 w-4" />
+          Channels
+        </button>
         </div>
         {/* Hearthside: the less-used pages fold away under More. */}
         <button
@@ -808,19 +822,19 @@ export function Sidebar() {
           className="flex w-full items-center gap-2 rounded-lg px-3 py-1.5 text-xs text-muted transition-colors hover:bg-ink-900/5 hover:text-ink-800"
         >
           <ChevronRightIcon className={`h-3.5 w-3.5 transition-transform ${moreShown ? "rotate-90" : ""}`} />
-          More
+          Tools &amp; history
         </button>
         {moreShown && (
           <div className="pl-2">
             <button
               type="button"
               disabled={!agentId}
-              onClick={openChannels}
-              aria-pressed={channelsOpen}
-              className={`flex w-full items-center gap-2 rounded-lg px-3 py-2 text-sm transition-colors disabled:cursor-not-allowed disabled:opacity-50 ${channelsOpen ? "bg-ink-900/8 text-ink-900" : "text-ink-800 hover:bg-ink-900/5"}`}
+              onClick={openSkills}
+              aria-pressed={skillsOpen}
+              className={`flex w-full items-center gap-2 rounded-lg px-3 py-2 text-sm transition-colors disabled:cursor-not-allowed disabled:opacity-50 ${skillsOpen ? "bg-ink-900/8 text-ink-900" : "text-ink-800 hover:bg-ink-900/5"}`}
             >
-              <SendIcon className="h-4 w-4" />
-              Channels
+              <SkillsIcon className="h-4 w-4" />
+              Skills
             </button>
             <button
               type="button"

@@ -104,7 +104,7 @@ const base64url = (buffer: Buffer) => buffer.toString("base64").replace(/\+/g, "
 let active: { server: Server; cancel: () => void } | null = null;
 
 function page(message: string): string {
-  return `<!doctype html><meta charset="utf-8"><title>Hearthside</title><body style="font-family:system-ui;display:grid;place-items:center;height:90vh;color:#333"><p>${message}</p></body>`;
+  return `<!doctype html><meta charset="utf-8"><title>Hearthside Source Edition</title><body style="font-family:system-ui;display:grid;place-items:center;height:90vh;color:#333"><p>${message}</p></body>`;
 }
 
 /** Sign in through the browser using Hearthside's public client ID. */

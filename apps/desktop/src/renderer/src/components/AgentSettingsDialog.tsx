@@ -40,9 +40,9 @@ function DeleteAgent({ agent }: { agent: AgentDetails }) {
     return (
       <div className="flex items-center justify-between gap-4 rounded-xl border border-border px-3.5 py-3">
         <div>
-          <div className="text-sm font-medium text-ink-900">Delete this agent</div>
+          <div className="text-sm font-medium text-ink-900">Delete this companion</div>
           <div className="text-xs text-muted">
-            Removes the agent, its memory, and all of its chats. This cannot be undone.
+            Removes this companion, their memory, and all of their chats. This cannot be undone.
           </div>
         </div>
         <button
@@ -66,7 +66,7 @@ function DeleteAgent({ agent }: { agent: AgentDetails }) {
     >
       <label className="grid gap-1.5">
         <span className="text-sm text-ink-900">
-          Type <span className="font-semibold">{agent.name}</span> to delete this agent, its memory,
+          Type <span className="font-semibold">{agent.name}</span> to delete this companion, their memory,
           and all of its chats.
         </span>
         <input
@@ -181,9 +181,9 @@ function ContextWindowField({
         </span>
       )}
       <span className="text-xs text-muted">
-        How much of the conversation the agent holds at once{value ? ` (now ${formatTokens(value)} tokens)` : ""}. Bigger
+        How much of the conversation the companion holds at once{value ? ` (now ${formatTokens(value)} tokens)` : ""}. Bigger
         remembers more of the chat directly but costs more and is slower; smaller compacts older messages sooner. Nothing
-        is lost: the agent can still look up earlier messages.
+        is lost: the companion can still look up earlier messages.
       </span>
     </div>
   );
@@ -373,6 +373,10 @@ function AgentForm({ initial, backendEpoch }: { initial: AgentDetails; backendEp
           if (changed && name.trim() && !busy && !repairBusy && !promptNeedsRefresh) void save();
         }}
       >
+        <div className="border-b border-border pb-3">
+          <p className="text-[11px] font-semibold uppercase tracking-[0.16em] text-muted">Identity</p>
+          <h2 className="mt-1 text-lg font-semibold text-ink-900">Who they are here</h2>
+        </div>
         <label className="grid gap-1.5">
           <span className="text-xs font-medium text-ink-700">Name</span>
           <input value={name} onChange={(event) => setName(event.target.value)} className="field" />
@@ -382,10 +386,15 @@ function AgentForm({ initial, backendEpoch }: { initial: AgentDetails; backendEp
           <input
             value={description}
             onChange={(event) => setDescription(event.target.value)}
-            placeholder="What this agent is for"
+            placeholder="Who this companion is"
             className="field"
           />
         </label>
+        <div className="mt-2 border-b border-border pb-3">
+          <p className="text-[11px] font-semibold uppercase tracking-[0.16em] text-muted">Thinking</p>
+          <h2 className="mt-1 text-lg font-semibold text-ink-900">Model, context and technical instructions</h2>
+          <p className="mt-1 text-xs leading-5 text-muted">These controls change how the runtime supports this companion. They do not define the whole of who they are.</p>
+        </div>
         <div className="grid gap-1.5">
           <span className="text-xs font-medium text-ink-700">Default model</span>
           <ModelPicker
@@ -485,7 +494,7 @@ export function AgentSettingsDialog() {
   const setAgentSettingsOpen = useAppStore((state) => state.setAgentSettingsOpen);
 
   return (
-    <FullPage open={open} onOpenChange={setAgentSettingsOpen} title="Agent settings" subtitle={agentName}>
+    <FullPage open={open} onOpenChange={setAgentSettingsOpen} title={agentName ? `${agentName}'s settings` : "Companion settings"} subtitle="Identity, models, tools and continuity">
       <div className="min-w-0 flex-1 overflow-y-auto overflow-x-hidden">
         <div className="mx-auto max-w-2xl px-5 pb-8 pt-2 sm:px-8">
           {/* Mounted per open so the form always starts from the saved agent. */}

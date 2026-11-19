@@ -5,7 +5,7 @@ export function AboutSettings() {
   useEffect(() => { void window.bridge.getAppVersion().then(setVersion).catch(() => undefined); }, []);
   return <section className="mt-4 grid gap-3">
     <h2>Hearthside Source Edition{version ? ` ${version}` : ""}</h2>
-    <p>Independent desktop client for Letta agents. This build uses a separate local profile and does not receive automatic updates.</p>
-    <p>Check with the person who built your copy for updates and support.</p>
+    <p>An independent companion desktop built on Letta. This edition keeps its own local profile and never enters the official Hearthside update channel.</p>
+    <p>Source builders control their own changes, releases, updates and support.</p>
   </section>;
 }

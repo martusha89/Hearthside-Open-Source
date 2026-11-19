@@ -220,7 +220,7 @@ type AppState = {
   /** null until loaded, or when the backend manages providers itself. */
   providers: ProviderSummary[] | null;
   /** What the main area shows for the selected agent. */
-  view: "chat" | "memory" | "skills" | "schedules" | "calendar" | "channels" | "connectors" | "files";
+  view: "presence" | "chat" | "memory" | "skills" | "schedules" | "calendar" | "channels" | "connectors" | "files";
   memory: MemoryState | null;
   conversations: ConversationSummary[];
   conversationsLoaded: boolean;
@@ -347,6 +347,7 @@ type AppState = {
     fields: Record<string, string>;
   }) => Promise<void>;
   disconnectProvider: (input: { providerId: string; providerName?: string }) => Promise<void>;
+  openPresence: () => void;
   openMemory: () => void;
   openSkills: () => void;
   openSchedules: () => void;
@@ -449,7 +450,7 @@ const CLEARED = {
   agentId: null,
   models: [],
   providers: null,
-  view: "chat",
+  view: "presence",
   memory: null,
   conversations: [],
   conversationsLoaded: false,
@@ -820,11 +821,11 @@ export const useAppStore = create<AppState>((set, get) => ({
         break;
       case "memory.updated":
         // Hearthside: memory changes outside a chat too (dreams, channels); refresh, batched.
-        if (get().view !== "memory") break;
+        if (get().view !== "memory" && get().view !== "presence") break;
         if (memoryRefresh) clearTimeout(memoryRefresh);
         memoryRefresh = setTimeout(() => {
           memoryRefresh = null;
-          if (get().view === "memory") void get().loadMemory();
+          if (get().view === "memory" || get().view === "presence") void get().loadMemory();
         }, 600);
         break;
       case "menu":
@@ -881,7 +882,7 @@ export const useAppStore = create<AppState>((set, get) => ({
           conversations: [],
           conversationsLoaded: true,
           activeId: null,
-          view: "chat",
+          view: "presence",
           memory: null,
         });
       }
@@ -921,8 +922,12 @@ export const useAppStore = create<AppState>((set, get) => ({
       historyVolumesError: null,
       focus: null,
       activeId: null,
+      chats: {},
+      chatCommands: {},
+      unread: {},
+      finished: null,
       pendingFirstMessage: null,
-      view: "chat",
+      view: "presence",
       memory: null,
     });
     void get().loadHistoryVolumes();
@@ -1708,6 +1713,10 @@ export const useAppStore = create<AppState>((set, get) => ({
     if (connection?.status === "ready" && connection.providers) void get().loadProviders();
   },
 
+  openPresence: () => {
+    set({ view: "presence" });
+    void get().loadMemory();
+  },
   openSkills: () => set({ view: "skills" }),
   openSchedules: () => set({ view: "schedules" }),
   openChannels: () => set({ view: "channels" }),

@@ -2,6 +2,7 @@
 import { useEffect } from "react";
 import { AgentSettingsDialog } from "./components/AgentSettingsDialog";
 import { ChatView } from "./components/ChatView";
+import { PresenceView } from "./components/PresenceView";
 import { MemoryView } from "./components/MemoryView";
 import { SkillsView } from "./components/SkillsView";
 import { SchedulesView } from "./components/SchedulesView";
@@ -143,7 +144,7 @@ export default function App() {
   return (
     <div className="flex h-screen overflow-hidden bg-surface text-ink-900">
       <Sidebar />
-      {view === "memory" ? <MemoryView key={agentId} /> : view === "skills" ? <SkillsView key={agentId} /> : view === "schedules" ? <SchedulesView key={agentId} /> : view === "calendar" ? <CalendarView key={agentId} /> : view === "channels" ? <ChannelsView key={agentId} /> : view === "connectors" ? <ConnectorsView key={agentId} /> : view === "files" ? <FilesView /> : <ChatView />}
+      {view === "presence" ? <PresenceView key={agentId} /> : view === "memory" ? <MemoryView key={agentId} /> : view === "skills" ? <SkillsView key={agentId} /> : view === "schedules" ? <SchedulesView key={agentId} /> : view === "calendar" ? <CalendarView key={agentId} /> : view === "channels" ? <ChannelsView key={agentId} /> : view === "connectors" ? <ConnectorsView key={agentId} /> : view === "files" ? <FilesView /> : <ChatView />}
       <SettingsDialog />
       <NewAgentDialog />
       <WelcomeGuide />

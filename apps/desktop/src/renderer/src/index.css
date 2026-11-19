@@ -4,17 +4,17 @@
 @import "highlight.js/styles/github-dark.css" (prefers-color-scheme: dark);
 
 @theme {
-  --color-brand: #0f766e;
+  --color-brand: #6d28d9;
   --color-brand-content: #ffffff;
-  --color-brand-hover: #115e59;
-  --color-brand-light: #f0fdfa;
-  --color-brand-light-content: #0f766e;
+  --color-brand-hover: #5b21b6;
+  --color-brand-light: #f5f3ff;
+  --color-brand-light-content: #6d28d9;
   
   /* Surface colors */
   --color-surface: #ffffff;
-  --color-surface-secondary: #f7fafa;
-  --color-surface-tertiary: #eef4f3;
-  --color-surface-hover: #f7fafa;
+  --color-surface-secondary: #faf9fc;
+  --color-surface-tertiary: #f2eff7;
+  --color-surface-hover: #f7f5fa;
   
   /* Text colors */
   --color-ink-900: #141414;
@@ -29,10 +29,10 @@
   --color-muted-light: #858585;
   
   /* Accent colors */
-  --color-accent: #0f766e;
-  --color-accent-hover: #115e59;
-  --color-accent-light: #f0fdfa;
-  --color-accent-subtle: #ccfbf1;
+  --color-accent: #6d28d9;
+  --color-accent-hover: #5b21b6;
+  --color-accent-light: #f5f3ff;
+  --color-accent-subtle: #ede9fe;
   
   /* Status colors */
   --color-error: #c41952;
@@ -50,17 +50,17 @@
   
   /* Background colors */
   --color-bg-000: #ffffff;
-  --color-bg-100: #f7fafa;
-  --color-bg-200: #eef4f3;
-  --color-bg-300: #e2ebe9;
-  --color-bg-400: #cfdcd9;
+  --color-bg-100: #faf9fc;
+  --color-bg-200: #f2eff7;
+  --color-bg-300: #e8e2ef;
+  --color-bg-400: #d8cfdf;
   
   /* Border */
-  --color-border: #e2ebe9;
-  --color-border-hover: #99d5cc;
+  --color-border: #e8e2ef;
+  --color-border-hover: #a78bfa;
   
-  /* Sidebar - Hearthside: faint teal tint */
-  --color-sidebar: #f1f6f5;
+  /* Sidebar: a restrained violet cast; each companion can still take over the accent. */
+  --color-sidebar: #f5f2f8;
   
   /* Shadows */
   --shadow-soft: 0 1px 2px rgba(0, 0, 0, 0.05);
@@ -136,8 +136,8 @@ code, pre, textarea.mono, input.mono {
 :root {
   /* Native controls (radios, checkboxes, number spinners) follow the theme. */
   color-scheme: light;
-  --scrollbar-thumb: #b5c4c1;
-  --scrollbar-thumb-hover: #0f766e;
+  --scrollbar-thumb: #c7bfd0;
+  --scrollbar-thumb-hover: #6d28d9;
 }
 
 /* Window chrome: the title bar areas drag the window, controls inside do not. */
@@ -209,16 +209,16 @@ input:focus-visible {
 /* Dark mode overrides using CSS custom properties */
 @media (prefers-color-scheme: dark) {
   :root {
-    --color-brand: #5eead4;
-    --color-brand-content: #042f2e;
-    --color-brand-hover: #1b3b37;
-    --color-brand-light: #132a27;
-    --color-brand-light-content: #5eead4;
+    --color-brand: #c4b5fd;
+    --color-brand-content: #1e1233;
+    --color-brand-hover: #312e55;
+    --color-brand-light: #251f3a;
+    --color-brand-light-content: #c4b5fd;
     
-    --color-surface: #121817;
-    --color-surface-secondary: #0e1312;
-    --color-surface-tertiary: #172120;
-    --color-surface-hover: #0b0f0e;
+    --color-surface: #15131a;
+    --color-surface-secondary: #100e14;
+    --color-surface-tertiary: #201c28;
+    --color-surface-hover: #0c0b10;
     
     --color-ink-900: #d6d6d6;
     --color-ink-800: #c2c2c2;
@@ -227,13 +227,13 @@ input:focus-visible {
     --color-ink-500: #737373;
     --color-ink-400: #2b2b2b;
     
-    --color-muted: #7a7a7a;
-    --color-muted-light: #595959;
+    --color-muted: #9b93a5;
+    --color-muted-light: #877f90;
     
-    --color-accent: #5eead4;
-    --color-accent-hover: #1b3b37;
-    --color-accent-light: #132a27;
-    --color-accent-subtle: #1b3b37;
+    --color-accent: #c4b5fd;
+    --color-accent-hover: #312e55;
+    --color-accent-light: #251f3a;
+    --color-accent-subtle: #312e55;
     
     --color-error: #ff6b6b;
     --color-error-light: #3d2424;
@@ -246,20 +246,20 @@ input:focus-visible {
     /* On the dark surface the plain warning is already 11.81:1. */
     --color-warning-strong: #ffc966;
     
-    --color-bg-000: #121817;
-    --color-bg-100: #0e1312;
-    --color-bg-200: #172120;
-    --color-bg-300: #22302e;
-    --color-bg-400: #334542;
+    --color-bg-000: #15131a;
+    --color-bg-100: #100e14;
+    --color-bg-200: #201c28;
+    --color-bg-300: #2a2433;
+    --color-bg-400: #40364d;
     
-    --color-border: #22302e;
-    --color-border-hover: #5eead4;
+    --color-border: #2a2433;
+    --color-border-hover: #a78bfa;
     
-    --color-sidebar: #101615;
+    --color-sidebar: #121018;
 
     color-scheme: dark;
-    --scrollbar-thumb: #3d5450;
-    --scrollbar-thumb-hover: #5eead4;
+    --scrollbar-thumb: #4a4156;
+    --scrollbar-thumb-hover: #a78bfa;
   }
 }
 

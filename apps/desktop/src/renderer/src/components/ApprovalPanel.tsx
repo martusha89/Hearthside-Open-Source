@@ -2,6 +2,7 @@
 import { relativeToFolder, toolLabel, toolSummary } from "../lib/format";
 import type { ApprovalDecision, ApprovalRequest } from "../types";
 import { type Question, QuestionForm, primaryButton, secondaryButton } from "./QuestionForm";
+import { ShieldIcon } from "./icons";
 
 /** The agent wants to run a tool that needs the user's permission. */
 /** The text a file-writing tool is about to put on disk, when it says. */
@@ -39,28 +40,41 @@ export function ApprovalPanel({
   return (
     <div className="mx-auto max-h-[40vh] w-full max-w-3xl overflow-y-auto px-6 pb-3">
       {/* Keyed so a form never carries answers over to the next request. */}
-      <div key={request.requestId} className="rounded-2xl border border-accent/30 bg-surface p-4 shadow-card">
+      <div key={request.requestId} className="overflow-hidden rounded-[1.4rem] border border-border bg-surface-secondary shadow-elevated">
         {isQuestion ? (
-          <QuestionForm
-            questions={questions ?? []}
-            onAnswer={(answers) => onDecide({ behavior: "allow", updatedInput: { ...request.input, answers } })}
-            onSkip={() => onDecide({ behavior: "deny", message: "The user skipped the question." })}
-          />
+          <div className="p-5">
+            <QuestionForm
+              questions={questions ?? []}
+              onAnswer={(answers) => onDecide({ behavior: "allow", updatedInput: { ...request.input, answers } })}
+              onSkip={() => onDecide({ behavior: "deny", message: "The user skipped the question." })}
+            />
+          </div>
         ) : (
-          <>
-            <div className="flex items-baseline justify-between gap-3">
-              <p className="text-sm font-medium text-ink-900">
-                Allow {toolLabel(request.toolName)}?
-              </p>
-              {queued > 0 && <span className="text-xs text-muted">{queued} more waiting</span>}
+          <div className="p-5">
+            <div className="flex items-start gap-3">
+              <span className="flex h-9 w-9 shrink-0 items-center justify-center rounded-full bg-accent-light text-accent">
+                <ShieldIcon className="h-4 w-4" />
+              </span>
+              <div className="min-w-0 flex-1">
+                <p className="text-[11px] font-semibold uppercase tracking-[0.16em] text-muted">Permission</p>
+                <p className="mt-0.5 text-base font-semibold text-ink-900">
+                  Allow {toolLabel(request.toolName)}?
+                </p>
+                <p className="mt-1 text-xs leading-5 text-muted">This request is waiting for your decision.</p>
+              </div>
+              {queued > 0 && <span className="shrink-0 rounded-full bg-surface-tertiary px-2.5 py-1 text-xs text-muted">{queued} more waiting</span>}
             </div>
-            <pre className="mt-2 max-h-40 overflow-auto whitespace-pre-wrap break-words rounded-xl bg-surface-tertiary p-3 font-mono text-xs text-ink-800">
+            <p className="mb-1.5 mt-4 text-[11px] font-semibold uppercase tracking-[0.12em] text-muted">Request preview</p>
+            <pre className="max-h-40 overflow-auto whitespace-pre-wrap break-words rounded-xl border border-border bg-surface p-3 font-mono text-xs leading-5 text-ink-800">
               {summary || JSON.stringify(request.input, null, 2)}
             </pre>
             {proposed && (
-              <pre className="mt-2 max-h-40 overflow-auto whitespace-pre-wrap break-words rounded-xl border border-border p-3 font-mono text-xs text-ink-700">
-                {proposed}
-              </pre>
+              <div className="mt-3">
+                <p className="mb-1.5 text-[11px] font-semibold uppercase tracking-[0.12em] text-muted">Proposed content</p>
+                <pre className="max-h-40 overflow-auto whitespace-pre-wrap break-words rounded-xl border border-border bg-surface p-3 font-mono text-xs leading-5 text-ink-700">
+                  {proposed}
+                </pre>
+              </div>
             )}
             {/* The line above is one field of the request, picked for brevity. What is being
                 approved is all of it (a helper's full instructions, every edit, a request's body). */}
@@ -72,10 +86,9 @@ export function ApprovalPanel({
                 </pre>
               </details>
             )}
-            <div className="mt-3 flex flex-wrap gap-2">
+            <div className="mt-4 flex flex-wrap gap-2">
               <button
                 type="button"
-                autoFocus
                 className={primaryButton}
                 disabled={sending}
                 onClick={() => onDecide({ behavior: "allow" })}
@@ -103,9 +116,9 @@ export function ApprovalPanel({
                 Deny
               </button>
             </div>
-          </>
+          </div>
         )}
-        {error && <p className="mt-2 break-words text-xs text-error">{error}</p>}
+        {error && <p className="border-t border-error/20 bg-error-light px-5 py-2.5 text-xs text-error">{error}</p>}
       </div>
     </div>
   );
