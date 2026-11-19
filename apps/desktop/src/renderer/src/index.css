@@ -1,0 +1,377 @@
+/* Derived from OSS-UI (https://github.com/letta-ai/letta-oss-ui, Apache-2.0, commit c01d155), modified by Hearthside. */
+@import "tailwindcss";
+@import "highlight.js/styles/github.css";
+@import "highlight.js/styles/github-dark.css" (prefers-color-scheme: dark);
+
+@theme {
+  --color-brand: #0f766e;
+  --color-brand-content: #ffffff;
+  --color-brand-hover: #115e59;
+  --color-brand-light: #f0fdfa;
+  --color-brand-light-content: #0f766e;
+  
+  /* Surface colors */
+  --color-surface: #ffffff;
+  --color-surface-secondary: #f7fafa;
+  --color-surface-tertiary: #eef4f3;
+  --color-surface-hover: #f7fafa;
+  
+  /* Text colors */
+  --color-ink-900: #141414;
+  --color-ink-800: #474747;
+  --color-ink-700: #474747;
+  --color-ink-600: #5c5c5c;
+  --color-ink-500: #6e6e6e;
+  --color-ink-400: #a6a6a6;
+  
+  /* Muted colors */
+  --color-muted: #5f6968;
+  --color-muted-light: #858585;
+  
+  /* Accent colors */
+  --color-accent: #0f766e;
+  --color-accent-hover: #115e59;
+  --color-accent-light: #f0fdfa;
+  --color-accent-subtle: #ccfbf1;
+  
+  /* Status colors */
+  --color-error: #c41952;
+  --color-error-light: #fdf2f5;
+  --color-success: #16a34a;
+  --color-success-light: #f0fdf4;
+  --color-info: #0f766e;
+  --color-info-light: #f0fdfa;
+  --color-warning: #b87800;
+  --color-warning-light: #fffbeb;
+  /* Warning text that clears WCAG AA for normal text: --color-warning is
+     3.67:1 on the light surface, which is fine for an icon and too faint to
+     read a sentence in. Same hue, enough contrast (5.93:1). */
+  --color-warning-strong: #8a5a00;
+  
+  /* Background colors */
+  --color-bg-000: #ffffff;
+  --color-bg-100: #f7fafa;
+  --color-bg-200: #eef4f3;
+  --color-bg-300: #e2ebe9;
+  --color-bg-400: #cfdcd9;
+  
+  /* Border */
+  --color-border: #e2ebe9;
+  --color-border-hover: #99d5cc;
+  
+  /* Sidebar - Hearthside: faint teal tint */
+  --color-sidebar: #f1f6f5;
+  
+  /* Shadows */
+  --shadow-soft: 0 1px 2px rgba(0, 0, 0, 0.05);
+  --shadow-card: 0 4px 16px rgba(0, 0, 0, 0.08);
+  --shadow-elevated: 0 8px 32px rgba(0, 0, 0, 0.12);
+}
+
+pre code.hljs {
+  background: transparent;
+  padding: 0;
+}
+
+html,
+body,
+#root {
+  height: 100%;
+}
+
+/* Hearthside: text size preference (Settings > Appearance). */
+html[data-text-size="small"] { font-size: 14px; }
+html[data-text-size="medium"] { font-size: 16px; }
+html[data-text-size="large"] { font-size: 18px; }
+
+body {
+  font-family: "Onest", ui-sans-serif, system-ui, -apple-system, sans-serif;
+  background-color: var(--color-surface);
+  color: var(--color-ink-900);
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+hr {
+  height: 1px;
+  margin: 1.5rem 0;
+  border: 0;
+  background-color: var(--color-border);
+}
+
+code, pre, textarea.mono, input.mono {
+  font-family: "Fira Code", ui-monospace, SFMono-Regular, Menlo, monospace;
+}
+
+/* Hearthside: scrollbars wide and visible enough to find and grab, in both themes. */
+::-webkit-scrollbar {
+  width: 12px;
+  height: 12px;
+}
+
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+::-webkit-scrollbar-thumb {
+  background-color: var(--scrollbar-thumb);
+  border: 3px solid transparent;
+  background-clip: content-box;
+  border-radius: 999px;
+  min-height: 40px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background-color: var(--scrollbar-thumb-hover);
+}
+
+::-webkit-scrollbar-thumb:active {
+  background-color: var(--color-accent);
+}
+
+::-webkit-scrollbar-corner {
+  background: transparent;
+}
+
+:root {
+  /* Native controls (radios, checkboxes, number spinners) follow the theme. */
+  color-scheme: light;
+  --scrollbar-thumb: #b5c4c1;
+  --scrollbar-thumb-hover: #0f766e;
+}
+
+/* Window chrome: the title bar areas drag the window, controls inside do not. */
+.app-drag {
+  -webkit-app-region: drag;
+  user-select: none;
+}
+
+.app-drag button,
+.app-drag a,
+.app-drag input {
+  -webkit-app-region: no-drag;
+}
+
+@layer components {
+  /* Compact pill used for the composer's folder, model and permission menus. */
+  .chip {
+    @apply inline-flex h-7 min-w-0 items-center gap-1.5 rounded-full px-2.5 text-xs text-ink-600 outline-none transition-colors;
+  }
+  .chip:hover:not(:disabled),
+  .chip[data-state="open"] {
+    @apply bg-surface-tertiary text-ink-900;
+  }
+  .chip:disabled {
+    @apply cursor-not-allowed opacity-50;
+  }
+
+  .field {
+    @apply w-full rounded-xl border border-border bg-surface-secondary px-3 py-2 text-sm text-ink-900 outline-none transition-colors;
+  }
+  .field::placeholder {
+    @apply text-muted-light;
+  }
+  .field:focus {
+    @apply border-border-hover;
+  }
+
+  .button-primary {
+    @apply inline-flex items-center justify-center gap-2 rounded-full bg-accent px-4 py-1.5 text-sm font-medium text-brand-content transition-opacity;
+  }
+  .button-primary:hover:not(:disabled) {
+    @apply opacity-85;
+  }
+  .button-primary:disabled {
+    @apply cursor-not-allowed opacity-40;
+  }
+
+  .button-secondary {
+    @apply inline-flex items-center justify-center gap-2 rounded-full border border-border bg-surface px-4 py-1.5 text-sm font-medium text-ink-800 transition-colors;
+  }
+  .button-secondary:hover:not(:disabled) {
+    @apply bg-surface-tertiary;
+  }
+  .button-secondary:disabled {
+    @apply cursor-not-allowed opacity-50;
+  }
+}
+
+:focus-visible {
+  outline: 2px solid color-mix(in srgb, var(--color-accent) 55%, transparent);
+  outline-offset: 2px;
+}
+
+textarea:focus-visible,
+input:focus-visible {
+  outline: none;
+}
+
+/* Dark mode overrides using CSS custom properties */
+@media (prefers-color-scheme: dark) {
+  :root {
+    --color-brand: #5eead4;
+    --color-brand-content: #042f2e;
+    --color-brand-hover: #1b3b37;
+    --color-brand-light: #132a27;
+    --color-brand-light-content: #5eead4;
+    
+    --color-surface: #121817;
+    --color-surface-secondary: #0e1312;
+    --color-surface-tertiary: #172120;
+    --color-surface-hover: #0b0f0e;
+    
+    --color-ink-900: #d6d6d6;
+    --color-ink-800: #c2c2c2;
+    --color-ink-700: #a6a6a6;
+    --color-ink-600: #8c8c8c;
+    --color-ink-500: #737373;
+    --color-ink-400: #2b2b2b;
+    
+    --color-muted: #7a7a7a;
+    --color-muted-light: #595959;
+    
+    --color-accent: #5eead4;
+    --color-accent-hover: #1b3b37;
+    --color-accent-light: #132a27;
+    --color-accent-subtle: #1b3b37;
+    
+    --color-error: #ff6b6b;
+    --color-error-light: #3d2424;
+    --color-success: #6bcf6b;
+    --color-success-light: #1f3d1f;
+    --color-info: #5eead4;
+    --color-info-light: #132a27;
+    --color-warning: #ffc966;
+    --color-warning-light: #3d3524;
+    /* On the dark surface the plain warning is already 11.81:1. */
+    --color-warning-strong: #ffc966;
+    
+    --color-bg-000: #121817;
+    --color-bg-100: #0e1312;
+    --color-bg-200: #172120;
+    --color-bg-300: #22302e;
+    --color-bg-400: #334542;
+    
+    --color-border: #22302e;
+    --color-border-hover: #5eead4;
+    
+    --color-sidebar: #101615;
+
+    color-scheme: dark;
+    --scrollbar-thumb: #3d5450;
+    --scrollbar-thumb-hover: #5eead4;
+  }
+}
+
+/* The composer responds to its own available width, including side panes. */
+.composer-surface { container: composer / inline-size; }
+.composer-toolbar {
+  /* One row at every width: destination, model, details, send. The destination
+     chip is icon-only in the composer, so it no longer needs its own line. */
+  display: grid;
+  grid-template-columns: auto minmax(0, 1fr) auto auto;
+  grid-template-areas: "location model details send";
+  align-items: center;
+  gap: 6px;
+  padding: 6px 10px 10px;
+}
+.composer-location, .composer-model, .composer-details, .composer-send {
+  display: flex;
+  min-width: 0;
+  align-items: center;
+  gap: 4px;
+}
+.composer-location { grid-area: location; }
+.composer-model { grid-area: model; }
+.composer-details { grid-area: details; flex-wrap: nowrap; justify-content: flex-end; }
+.composer-send { grid-area: send; }
+.composer-toolbar .chip { padding-inline: 6px; border-radius: 6px; }
+.composer-toolbar .chip:focus-visible { outline: 2px solid var(--color-accent); outline-offset: 2px; }
+.composer-destination, .composer-folder, .composer-permission, .composer-reasoning { flex-shrink: 0; white-space: nowrap; }
+.composer-model-picker { min-width: 0; flex: 1 1 auto; }
+.composer-model-picker > button { max-width: 100%; }
+.composer-model-picker > div {
+  left: auto;
+  right: 0;
+  width: min(20rem, calc(100cqi - 24px), calc(100vw - 24px));
+}
+.composer-toolbar--owner {
+  grid-template-columns: auto minmax(0, 1fr) auto;
+  grid-template-areas: "location details send";
+}
+
+/* Hearthside memory web: files changed by the selected commit gently pulse. */
+@keyframes memory-pulse {
+  0%, 100% { opacity: 0.25; }
+  50% { opacity: 0.9; }
+}
+.memory-pulse {
+  animation: memory-pulse 1.6s ease-in-out infinite;
+}
+@media (prefers-reduced-motion: reduce) {
+  .memory-pulse { animation: none; opacity: 0.8; }
+}
+
+/* Hearthside: the activity line's wording changes with a soft fade. */
+@keyframes fade-in {
+  from {
+    opacity: 0;
+    transform: translateY(2px);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+.animate-fade-in {
+  animation: fade-in 320ms ease-out;
+}
+
+/* Hearthside "make it yours": a companion's theme colour. App.tsx sets
+   --theme-accent (a mid-tone #rrggbb) on <html> and data-themed while that
+   companion is selected; the accent and the surfaces are re-derived from it,
+   darker for text on light surfaces, lighter on dark ones. */
+:root[data-themed] {
+  --color-accent: color-mix(in oklab, var(--theme-accent) 85%, black);
+  --color-accent-hover: color-mix(in oklab, var(--theme-accent) 70%, black);
+  --color-accent-light: color-mix(in oklab, var(--theme-accent) 8%, white);
+  --color-accent-subtle: color-mix(in oklab, var(--theme-accent) 20%, white);
+  --color-brand: var(--color-accent);
+  --color-brand-hover: var(--color-accent-hover);
+  --color-brand-light: var(--color-accent-light);
+  --color-brand-light-content: var(--color-accent);
+  --color-info: var(--color-accent);
+  --color-info-light: var(--color-accent-light);
+  --color-surface-secondary: color-mix(in oklab, var(--theme-accent) 4%, white);
+  --color-surface-tertiary: color-mix(in oklab, var(--theme-accent) 8%, white);
+  --color-surface-hover: color-mix(in oklab, var(--theme-accent) 4%, white);
+  --color-bg-100: color-mix(in oklab, var(--theme-accent) 4%, white);
+  --color-bg-200: color-mix(in oklab, var(--theme-accent) 8%, white);
+  --color-bg-300: color-mix(in oklab, var(--theme-accent) 13%, white);
+  --color-bg-400: color-mix(in oklab, var(--theme-accent) 22%, white);
+  --color-border: color-mix(in oklab, var(--theme-accent) 13%, white);
+  --color-border-hover: color-mix(in oklab, var(--theme-accent) 45%, white);
+  --color-sidebar: color-mix(in oklab, var(--theme-accent) 6%, white);
+}
+@media (prefers-color-scheme: dark) {
+  :root[data-themed] {
+    --color-accent: color-mix(in oklab, var(--theme-accent) 72%, white);
+    --color-accent-hover: color-mix(in oklab, var(--theme-accent) 28%, #0e0e0e);
+    --color-accent-light: color-mix(in oklab, var(--theme-accent) 12%, #0e0e0e);
+    --color-accent-subtle: color-mix(in oklab, var(--theme-accent) 24%, #0e0e0e);
+    --color-brand-content: #0a0a0a;
+    --color-surface: color-mix(in oklab, var(--theme-accent) 6%, #111111);
+    --color-surface-secondary: color-mix(in oklab, var(--theme-accent) 5%, #0c0c0c);
+    --color-surface-tertiary: color-mix(in oklab, var(--theme-accent) 10%, #161616);
+    --color-surface-hover: color-mix(in oklab, var(--theme-accent) 4%, #090909);
+    --color-bg-000: var(--color-surface);
+    --color-bg-100: var(--color-surface-secondary);
+    --color-bg-200: var(--color-surface-tertiary);
+    --color-bg-300: color-mix(in oklab, var(--theme-accent) 14%, #202020);
+    --color-bg-400: color-mix(in oklab, var(--theme-accent) 20%, #2c2c2c);
+    --color-border: color-mix(in oklab, var(--theme-accent) 15%, #1c1c1c);
+    --color-border-hover: var(--color-accent);
+    --color-sidebar: color-mix(in oklab, var(--theme-accent) 5%, #0e0e0e);
+    --scrollbar-thumb-hover: var(--color-accent);
+  }
+}

@@ -1,0 +1,14 @@
+node_modules/
+out/
+dist/
+release/
+coverage/
+/apps/desktop/build/
+*.tsbuildinfo
+.env
+.env.*
+*.pem
+*.pfx
+*.key
+*.log
+.source-profile/

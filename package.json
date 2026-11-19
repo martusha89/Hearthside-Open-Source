@@ -1,0 +1,14 @@
+{
+  "name": "hearthside-source-edition",
+  "private": true,
+  "license": "Apache-2.0",
+  "workspaces": ["apps/*", "packages/*"],
+  "engines": { "node": ">=24.22.1 <25" },
+  "overrides": { "@letta-ai/letta-code@0.34.36": { "react": "18.3.1" } },
+  "scripts": {
+    "dev": "npm run dev --workspace apps/desktop",
+    "build": "npm run build --workspace apps/desktop",
+    "typecheck": "npm run typecheck --workspaces --if-present",
+    "test": "npm run test --workspaces --if-present"
+  }
+}
