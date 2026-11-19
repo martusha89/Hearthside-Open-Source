@@ -1,4 +1,68 @@
 
+HEARTHSIDE SOURCE EDITION LICENSING NOTICE
+
+The Original Hearthside Material is provided under the Apache License,
+Version 2.0, subject to the “Commons Clause” License Condition v1.0 below.
+
+“Original Hearthside Material” means only copyrightable material expressly
+identified in a file header or provenance record as owned by a Licensor and
+licensed under these terms. Absence of that identification does not place
+material under these terms. It does not include third-party material, upstream
+material, dependencies, trademarks, service names, or any portion subject to
+another licence. Where ownership or provenance is uncertain, no Commons Clause
+restriction should be inferred solely from inclusion in this repository.
+
+This combination is source-available and is not an OSI-approved open-source
+licence. Existing rights granted under earlier licences are not revoked.
+
+“Commons Clause” License Condition v1.0
+
+The Software is provided to you by the Licensor under the License, as defined
+below, subject to the following condition.
+
+Without limiting other conditions in the License, the grant of rights under the
+License will not include, and the License does not grant to you, the right to
+Sell the Software.
+
+For purposes of the foregoing, “Sell” means practicing any or all of the rights
+granted to you under the License to provide to third parties, for a fee or other
+consideration (including without limitation fees for hosting or consulting/ support services related to the Software), a product or service whose value
+derives, entirely or substantially, from the functionality of the Software.
+Any license notice or attribution required by the License must also include
+this Commons Clause License Condition notice.
+
+Software: Original Hearthside Material
+License: Apache License, Version 2.0
+Licensor: Marta S for material she owns; each contributor for contributor-owned
+material expressly submitted under these terms
+
+The Commons Clause License Condition above follows version 1.0, with the
+Software, License, and Licensor fields completed for this distribution.
+
+ADDITIONAL PERMISSION FOR PROFESSIONAL SERVICES
+
+Notwithstanding the definition of “Sell” above, each Licensor permits a person
+to charge for their own installation, training, maintenance, support, or
+development expertise, provided that (a) the Software itself is supplied
+without charge under these terms, (b) the fee is genuinely for the person's
+labour or expertise, and (c) the paid offering is not a sale, rental, hosted
+substitute, or paid access to substantially the Software itself.
+
+SURVIVING EARLIER AND UPSTREAM GRANTS
+
+Material previously distributed under Apache-2.0 remains available under that
+grant, including from earlier repository revisions. These terms apply only to
+new copyrightable material first distributed under them, or as an additional
+licence where the applicable copyright holder validly offers the material under
+these terms. Nothing here revokes or narrows an earlier grant.
+
+The Apache-2.0 text below also remains the applicable unmodified licence for
+third-party or upstream Apache-2.0 material identified elsewhere in this
+repository; the Commons Clause does not apply to that material.
+
+See LICENSING.md for a plain-language summary. The Apache License, Version 2.0
+follows in full.
+
                                  Apache License
                            Version 2.0, January 2004
                         http://www.apache.org/licenses/

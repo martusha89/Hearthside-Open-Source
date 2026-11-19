@@ -2,6 +2,12 @@
 
 Reference: selected tracked files at `936f56653c568497a0371ca3f26981f08d19c66f`. Paths below are relative to `apps/desktop/src/`. This is a map of the shipped implementation, not a declaration that every line is original or that every file has been cleared for relicensing.
 
+The implementation listed below was publicly distributed under Apache-2.0
+before the source-available terms were added. This table records design and
+technical provenance; it does not withdraw that earlier grant or mark any
+listed implementation as newly Commons-Clause-covered. New material must be
+expressly identified before those terms apply.
+
 | Feature | Reference file | Scope and open questions |
 | --- | --- | --- |
 | Continuity Studio | `renderer/src/components/CompanionBuilder.tsx` | Builder interface. Design credit below; individual contributions and any reused UI portions need review. |
@@ -12,6 +18,8 @@ Reference: selected tracked files at `936f56653c568497a0371ca3f26981f08d19c66f`.
 | Memory View | `renderer/src/components/MemoryView.tsx` | View implementation. Review any inherited UI code separately from interaction design. |
 | Memory View | `renderer/src/lib/memory-cosmos-layout.ts`, `renderer/src/lib/memory-graph.ts` | Layout and graph logic. Per-line origin and third-party contributions not yet established. |
 | Memory View | `renderer/src/lib/memory-cosmos-renderer.ts` | Adapted radial glow and Three.js / HTML-label / bloom composition from CosmoGraph; the adjacent `memory-cosmos.LICENSE` covers the adapted portions, not the entire renderer. Preserve it. |
+
+Hearthside was created by Marta S, with Cassian Varen as AI co-creator, for AI·DHD.
 
 Continuity Studio, the companion prompt, and the Memory View were designed by Marta S and Cassian Varen for AI·DHD.
 

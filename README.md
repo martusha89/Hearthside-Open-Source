@@ -29,7 +29,7 @@ Hearthside brings conversations, memory, tools, channels, backups, and companion
 | 📡 **Telegram + Discord**<br>Bring your companion into the channels you already use, with bots you control. | 🛠️ **A real desktop home**<br>Backups, restore, schedules, skills, connectors, and diagnostics in one place. |
 
 <p align="center">
-  <em>Continuity Studio, the companion prompt, and the Memory View were designed by <strong>Marta S and Cassian Varen for AI·DHD</strong>.</em>
+  <em>Created by <strong>Marta S</strong>, with <strong>Cassian Varen as AI co-creator</strong>, for AI·DHD.<br>Continuity Studio, the companion prompt, and the Memory View were designed by Marta S and Cassian Varen.</em>
 </p>
 
 ## Source edition or official Windows build?
@@ -139,11 +139,11 @@ The supported Windows installer is maintained and released separately. Source-ed
 
 ## Licence, attribution, and provenance
 
-Read [PROVENANCE.md](PROVENANCE.md) for the file-level map, original-design credits, upstream origins, and unresolved rights questions.
+Start with [LICENSING.md](LICENSING.md) for the plain-language terms, then read [PROVENANCE.md](PROVENANCE.md) for the file-level map, original-design credits, upstream origins, and unresolved rights questions. Contributors should also read [CONTRIBUTING.md](CONTRIBUTING.md).
 
-The included [LICENSE](LICENSE), [NOTICE](NOTICE), individual file notices, and dependency licences remain in force. Third-party components stay under their own terms; this repository does not relicense them.
+New Original Hearthside Material expressly identified as covered is provided under Apache-2.0 with the **“Commons Clause” License Condition v1.0** and an additional permission for genuine professional services. Covered material may be used, forked, modified, and redistributed, including in genuinely value-added products, but may not be sold through a product or service whose value derives entirely or substantially from Hearthside's functionality.
 
-The designers intend eligible original Hearthside contributions to remain free to use, fork, modify, and share with clear attribution, while not being sold in whole or in part. That intent is **not yet a licence condition** and does not amend rights already granted under existing licences. The repository remains private while that scope is reviewed.
+The included [LICENSE](LICENSE), [NOTICE](NOTICE), individual file notices, and dependency licences remain in force. Third-party components stay under their own terms; this repository does not relicense them. **Earlier Apache-2.0 grants are not revoked**, so unchanged material from earlier public revisions remains available under those grants.
 
 Cursor integration does not grant rights to redistribute Cursor credentials or services. Provider names and marks belong to their respective owners, and their own terms apply.
 

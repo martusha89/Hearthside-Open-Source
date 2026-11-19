@@ -2,7 +2,7 @@
   "name": "@hearthside-source/desktop",
   "version": "0.1.41",
   "private": true,
-  "license": "Apache-2.0",
+  "license": "SEE LICENSE IN LICENSE",
   "description": "Independent source edition desktop client",
   "main": "out/main/index.js",
   "scripts": {
