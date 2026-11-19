@@ -4,7 +4,6 @@ import { describeCron } from "../lib/schedule-presets";
 import { useAppStore } from "../store";
 import type { CalendarOccurrence, ChannelAccount, ConversationPreview, MemoryCommit, PresenceCalendarSummary, Schedule } from "../types";
 import { Avatar } from "./Avatar";
-import { CompanionPageHeader } from "./CompanionPageHeader";
 import { CalendarIcon, ClockIcon, MemoryIcon, PlusIcon, SendIcon } from "./icons";
 
 const RECENT_LIMIT = 4;
@@ -261,8 +260,6 @@ export function PresenceView() {
 
   return (
     <main className="relative min-w-0 flex-1 overflow-y-auto bg-surface">
-      <CompanionPageHeader title="Presence" />
-
       <div className="mx-auto w-full max-w-6xl px-8 pb-14 pt-10">
         <section className="relative overflow-hidden rounded-[2rem] border border-border bg-surface-secondary px-7 py-8 shadow-card sm:px-9">
           <div className="pointer-events-none absolute -right-24 -top-28 h-80 w-80 rounded-full bg-accent opacity-[0.08] blur-3xl" aria-hidden="true" />
