@@ -283,6 +283,7 @@ export const requestSchemas = {
   listMemoryActivity: z.tuple([id, z.number().int().min(1).max(5_000)]),
   readMemoryCommitDiff: z.tuple([id, z.string().regex(/^[0-9a-f]{4,64}$/i)]),
   listConversations: z.tuple([id]),
+  listConversationPreviews: z.tuple([id, z.array(id).min(1).max(5).refine((items) => new Set(items).size === items.length, "Conversation ids must be unique.")]),
   loadHistory: z.tuple([id, z.number().int().min(1).max(500), z.object({ before: id.optional(), around: id.optional() }).strict().refine((value) => !(value.before && value.around), "Choose one history cursor.").optional()]),
   latestMessageMark: z.tuple([id]),
   renameConversation: z.tuple([id, text(200)]),
@@ -316,6 +317,7 @@ export const requestSchemas = {
   startImageSetup: z.tuple([z.enum(["install", "login"]), z.enum(["browser", "device"]).optional()]),
   cancelImageSetup: z.tuple([id]),
   listCalendar: z.tuple([z.number().int(), z.number().int()]),
+  getPresenceCalendar: z.tuple([id, z.number().int(), z.number().int()]).refine(([, from, to]) => to > from && to - from <= 90 * 86_400_000, "Choose a future window no longer than 90 days."),
   saveCalendarEvent: z.tuple([
     z
       .object({

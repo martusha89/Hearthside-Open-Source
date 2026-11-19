@@ -344,6 +344,12 @@ export type CalendarOccurrence = {
   revision: number;
   readOnly: boolean;
 };
+export type PresenceCalendarSummary = {
+  /** Whether this companion is currently allowed to use Hearthside's calendar tools. */
+  shared: boolean;
+  /** The next occurrence in the requested bounded window; never returned without access. */
+  occurrence: CalendarOccurrence | null;
+};
 /** An imported calendar (iCal link). The link itself never leaves the main process. */
 export type CalendarSubscription = {
   id: string;
@@ -736,6 +742,14 @@ export type ConversationSummary = {
   channel?: string;
   /** Hearthside: a read-only part of a restored chat's history (see HistoryVolume). */
   history?: HistoryVolume;
+};
+
+/** A bounded, human-authored preview for a recent conversation. */
+export type ConversationPreview = {
+  conversationId: string;
+  kind: "user" | "assistant";
+  text: string;
+  date: string | null;
 };
 
 /**
@@ -1682,6 +1696,8 @@ export type AppRequests = {
   /** Hearthside: the unified diff of one memory commit. */
   readMemoryCommitDiff(agentId: string, sha: string): string;
   listConversations(agentId: string): ConversationSummary[];
+  /** Latest meaningful message for at most five conversations owned by this companion. */
+  listConversationPreviews(agentId: string, conversationIds: string[]): ConversationPreview[];
   loadHistory(conversationId: string, limit: number, options?: HistoryPageOptions): HistoryResult;
   /** Hearthside: id and time of the chat's newest message, to notice messages that arrived from elsewhere. */
   latestMessageMark(conversationId: string): string | null;
@@ -1724,6 +1740,8 @@ export type AppRequests = {
   importConnectors(picks: Array<{ from: string; name: string }>, agentIds: string[]): number;
   /** Hearthside: the built-in calendar between two moments (epoch ms). */
   listCalendar(fromMs: number, toMs: number): CalendarOccurrence[];
+  /** Access-checked next calendar occurrence for one companion's Presence view. */
+  getPresenceCalendar(agentId: string, fromMs: number, toMs: number): PresenceCalendarSummary;
   saveCalendarEvent(input: CalendarEventInput): CalendarEvent;
   deleteCalendarEvent(id: string): void;
   listCalendarSubscriptions(): CalendarSubscription[];

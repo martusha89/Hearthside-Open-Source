@@ -15,14 +15,14 @@ const observers = new Set([
   // Reads ChatGPT's usage and lists resets; spending one (useGptReset) is a
   // change to the person's plan and stays behind the lock.
   "getGptUsage",
-  "readMemoryFileAt", "listMemoryActivity", "readMemoryCommitDiff", "listConversations",
+  "readMemoryFileAt", "listMemoryActivity", "readMemoryCommitDiff", "listConversations", "listConversationPreviews",
   "loadHistory", "latestMessageMark", "listArchivedConversations", "getDreamSettings",
   "searchMessages", "listDirectory", "readWorkingFile", "listSecretNames", "listConnectors",
   "listConnectorVoices", "listConnectorImports", "readAudioFile", "listGifs", "imageEngineStatus",
   // Asks the Codex CLI whether it is signed in; installing it or signing in
   // (startImageSetup) writes, so that one stays behind the lock.
   "imageConnectStatus",
-  "listCalendar", "listCalendarSubscriptions", "calendarAccess", "readImageFile", "getDiagnostics",
+  "listCalendar", "getPresenceCalendar", "listCalendarSubscriptions", "calendarAccess", "readImageFile", "getDiagnostics",
   "getComputerStatus", "getChannelServiceStatus", "getToolset", "listChannels", "listChannelAccounts", "listPairings",
   "listMutedChannels", "listChannelRoutes", "listSchedules", "listScheduleRuns", "checkPrograms",
   "listSkills", "listSkillCatalog", "getUpdateReady", "getAppVersion",
